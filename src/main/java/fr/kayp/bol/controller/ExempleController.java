@@ -1,8 +1,9 @@
-package fr.kayp.bol.controllers;
+package fr.kayp.bol.controller;
 
 
 import com.baeldung.openapi.api.V2ApiDelegate;
 import com.baeldung.openapi.model.*;
+import fr.kayp.bol.repository.ProofOfAuthenticityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/exemple")
 public class ExempleController implements V2ApiDelegate {
 
+    final ProofOfAuthenticityRepository proofOfAuthenticityRepository;
+
+    public ExempleController(final ProofOfAuthenticityRepository proofOfAuthenticityRepository) {
+        this.proofOfAuthenticityRepository = proofOfAuthenticityRepository;
+    }
+
     @PostMapping("/shipping")
     public ResponseEntity<ShippingInstructionRefStatus> v2ShippingInstructionsPost(ShippingInstructionRequest shippingInstructionRequest,
                                                                                     String apIVersion) {
         System.out.println("hello");
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
+    }
+
+    @PostMapping("/test")
+    public ResponseEntity<ShippingInstructionRefStatus> test() throws Exception {
+        System.out.println("hello");
+
+        proofOfAuthenticityRepository.createProofOfAuthenticity("hello");
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
