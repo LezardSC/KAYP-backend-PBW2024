@@ -1,6 +1,5 @@
 package fr.kayp.bol.repository.impl;
 
-import fr.kayp.bol.BillOfLadingContract;
 import fr.kayp.bol.repository.ProofOfAuthenticityRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -38,19 +37,28 @@ public class DefaultProofOfAuthenticityRepository implements ProofOfAuthenticity
 
     @Override
     public String createProofOfAuthenticity(String serializedEbl) throws Exception {
-        TransactionManager txManager = new RawTransactionManager(web3j, credentials, chainId.getChainId().longValue());
+//        TransactionManager txManager = new RawTransactionManager(web3j, credentials, chainId.getChainId().longValue());
+//
+//        System.out.println("Deploying contract ...");
+//        String eBL = "eBL";
+//        Date date = new Date();
+//        Timestamp ts = new Timestamp(date.getTime());
+//
+        /*
+            to hash:
 
-        System.out.println("Deploying contract ...");
-        String eBL = "eBL";
-        Date date = new Date();
-        Timestamp ts = new Timestamp(date.getTime());
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(
+                serializedEbl.getBytes());
+        */
 
-        RemoteCall<BillOfLadingContract> call = BillOfLadingContract.deploy(web3j, txManager, new DefaultGasProvider(),
-                eBL, BigInteger.valueOf(Timestamp.valueOf(ts.toString()).getTime()));
-
-        BillOfLadingContract billOfLadingContract = call.send();
-
-        System.out.println("Deploying contract : " + billOfLadingContract.getContractAddress());
-        return billOfLadingContract.getContractAddress();
+//        RemoteCall<BillOfLadingContract> call = BillOfLadingContract.deploy(web3j, txManager, new DefaultGasProvider(),
+//                eBL, BigInteger.valueOf(Timestamp.valueOf(ts.toString()).getTime()));
+//
+//        BillOfLadingContract billOfLadingContract = call.send();
+//
+//        System.out.println("Deploying contract : " + billOfLadingContract.getContractAddress());
+//        return billOfLadingContract.getContractAddress();
+        return "";
     }
 }
