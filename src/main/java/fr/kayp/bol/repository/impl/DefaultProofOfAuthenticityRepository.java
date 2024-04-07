@@ -30,7 +30,6 @@ public class DefaultProofOfAuthenticityRepository implements ProofOfAuthenticity
 
         proc.waitFor();
         BufferedReader lineReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-
         return lineReader.lines().collect(Collectors.joining());
     }
 }
