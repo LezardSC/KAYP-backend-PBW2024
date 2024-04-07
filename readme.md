@@ -14,10 +14,10 @@ Our solution addresses critical industry challenges, the efficient and secure:
 
 Follow these steps to clone the repository and start the development server:
 
-- git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/)
-- `cd frontend`
-- `npm install`
-- `npm run dev`
+- `cd backend`
+- `mvn clean install`
+- `java -jar`
+- git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/) and follow the instructions
 
 # Backend
 User management with authentication.
