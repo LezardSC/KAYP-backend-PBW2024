@@ -30,10 +30,8 @@ public class ExempleController implements V2ApiDelegate {
 
     @PostMapping("/test")
     public ResponseEntity<ShippingInstructionRefStatus> test() throws Exception {
-        System.out.println("hello");
-
-        proofOfAuthenticityRepository.createProofOfAuthenticity("hello");
-
+        String nftId = proofOfAuthenticityRepository.createProofOfAuthenticity("hello");
+        System.out.println("nftId: " + nftId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
