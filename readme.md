@@ -11,33 +11,13 @@ Our solution addresses critical industry challenges, the efficient and secure:
 - Storage: Employs blockchain technology for auditing all documents, preserving an immutable record of documents and all user-provided data with the highest level of security
 
 # Getting Started
+
 Follow these steps to clone the repository and start the development server:
-//
-//
-//
 
-# Front-end
-
-This using the following stack:
-
-- Language - [TypeScript](https://www.typescriptlang.org)
-- Styling - [Tailwind CSS](https://tailwindcss.com)
-- Components - [Shadcn-ui](https://ui.shadcn.com)
-- Schema Validations - [Zod](https://zod.dev)
-- State Management - [Zustand](https://zustand-demo.pmnd.rs)
-- Forms - [React Hook Form](https://ui.shadcn.com/docs/components/form)
-- Linting - [ESLint](https://eslint.org)
-- Formatting - [Prettier](https://prettier.io)
-
-## Pages
-
-| Pages                                                                       | Specifications              | Preview
-|:----------------------------------------------------------------------------|:----------------------------|------------------------------------------------------------------------------------------------------
-| [Login](https://localhost:5173/log-in)                                      | Login page                  | ///////////////////////////////////////////////////     |
-| [Dashboard](https://localhost:5173/)              | Dashboard                   		            |													  |
-| [Create eBL](https://localhost:5173/bol/create)    | Create a new eBL            			    | /////////////////////////////////////////////////////////////// |
-| [List eBL](https://localhost:5173/bol/list) | List and manage all the eBL 			    | ////////////////////////////////////////////////////////////////
-
+- `git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/)`
+- `cd frontend`
+- `npm install`
+- `npm run dev`
 
 # Backend
 User management with authentication.
