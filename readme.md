@@ -21,8 +21,11 @@ Follow these steps to clone the repository and start the development server:
 
 # Backend
 User management with authentication.
-To deploy the smart contract we need to get every informations needed to create the bill of Lading. 
-In order to do that, we use the DCSA API (https://app.swaggerhub.com/apis/dcsaorg/DCSA_EBL/3.0.0-Beta-1) to standardize the documents.
+To deploy the NFT we need to get every informations needed to create the bill of Lading. 
+In order to do that, we use the DCSA API (https://app.swaggerhub.com/apis/dcsaorg/DCSA_EBL/3.0.0-Beta-1) to standardize the documents. Then we serialize it and hash it.
+
+## Blockchain Implementation
+After getting the hashed document, we mint a NFT and store the hash in its metadata.
 
 This using the following stack:
 
@@ -31,7 +34,3 @@ This using the following stack:
 - Database - [SQLite](https://www.sqlite.org/)
 
 Lien du swagger : http://localhost:8080/swagger-ui/index.html
-
-# Blockchain Implementation
-////////////////////////////
-////////////////////////////
