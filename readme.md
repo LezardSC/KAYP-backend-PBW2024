@@ -14,7 +14,7 @@ Our solution addresses critical industry challenges, the efficient and secure:
 
 Follow these steps to clone the repository and start the development server:
 
-- `git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/)`
+- git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/)
 - `cd frontend`
 - `npm install`
 - `npm run dev`
