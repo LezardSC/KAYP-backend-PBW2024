@@ -16,7 +16,7 @@ Follow these steps to clone the repository and start the development server:
 
 - `cd backend`
 - `mvn clean install`
-- `java -jar`
+- `java -jar target/bol-0.0.1-SNAPSHOT.jar`
 - git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/) and follow the instructions
 
 # Backend
@@ -30,7 +30,6 @@ After getting the hashed document, we mint a NFT and store the hash in its metad
 This using the following stack:
 
 - Language - [Python](https://www.python.org/)
-- Framework - [Django](https://www.djangoproject.com/)
-- Database - [SQLite](https://www.sqlite.org/)
+- Framework - [Spring boot](https://spring.io/)
 
-Lien du swagger : http://localhost:8080/swagger-ui/index.html
+Swagger link : http://localhost:8080/swagger-ui/index.html
