@@ -2,7 +2,6 @@ import argparse
 import xrpl
 from xrpl.clients import JsonRpcClient
 from xrpl.wallet import Wallet
-from xrpl.models.requests import AccountNFTs
 
 testnet_url = "https://s.altnet.rippletest.net:51234"
 
@@ -15,7 +14,7 @@ def mint_token(seed, ebl):
         flags=int(0),
         transfer_fee=int(0),
         nftoken_taxon=int(0),
-        memos= [xrpl.models.transactions.Memo(memo_data=xrpl.utils.str_to_hex(ebl), memo_type="687474703a2f2f6578616d706c652e636f6d2f6d656d6f2f67656e65726963")]
+        memos= [xrpl.models.transactions.Memo(memo_data=xrpl.utils.str_to_hex(ebl), memo_type=xrpl.utils.str_to_hex("ebl"))]
     )
     reply=""
     try:

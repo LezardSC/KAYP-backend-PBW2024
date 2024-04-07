@@ -4,10 +4,6 @@ import fr.kayp.bol.repository.ProofOfAuthenticityRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.SimpleScriptContext;
 import java.io.*;
 import java.util.stream.Collectors;
 
