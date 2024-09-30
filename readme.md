@@ -15,7 +15,7 @@ Our solution addresses critical industry challenges, the efficient and secure:
 Follow these steps to clone the repository and start the development server:
 
 - `cd backend`
-- `mvn clean install`
+- `mvn install`
 - `java -jar target/bol-0.0.1-SNAPSHOT.jar`
 - git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/) and follow the instructions
 

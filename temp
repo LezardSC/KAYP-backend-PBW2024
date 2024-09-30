@@ -28,3 +28,6 @@ DCSA EBL ISS REP V3 :
 /v3/ebl-issuance-responses ok
 
 https://www.baeldung.com/java-openapi-generator-server
+
+
+In UtilizedTansportEquipmentShipper.java : change public String getIsShipperOwned() in public Boolean getIsShipperOwned() and change the return type of the method to Boolean

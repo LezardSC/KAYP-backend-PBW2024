@@ -97,17 +97,19 @@
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.1.0</version>
+				<version>7.8.0</version>
 				<executions>
 					<execution>
+						<id>DCSA_EBL</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/src/main/resources/contracts/DCSA_EBL.yml
+								${project.basedir}/src/main/resources/contracts/DCSA_EBL_v3.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
+							<skip>true</skip>
 							<apiPackage>com.baeldung.openapi.api</apiPackage>
 							<modelPackage>com.baeldung.openapi.model</modelPackage>
 							<supportingFilesToGenerate>
