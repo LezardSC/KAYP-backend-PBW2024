@@ -2963,20 +2963,6 @@ components:
                     description: |
                       A line of the address to be displayed on the transport document.
                     example: 'Strawinskylaan 4117'
-                placeOfIssue:
-                  type: object
-                  title: Place of Issue
-                  description: |
-                    An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-                    The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-                  properties:
-                    locationName:
-                      type: string
-                      description: The name of the location.
-                      pattern: ^\S(?:.*\S)?$
-                      example: Port of Amsterdam
-                      maxLength: 100
                   oneOf:
                     - type: object
                       title: UN Location Code
@@ -3395,20 +3381,6 @@ components:
                     description: |
                       A line of the address to be displayed on the transport document.
                     example: 'Strawinskylaan 4117'
-                placeOfIssue:
-                  type: object
-                  title: Place of Issue
-                  description: |
-                    An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-                    The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-                  properties:
-                    locationName:
-                      type: string
-                      description: The name of the location.
-                      pattern: ^\S(?:.*\S)?$
-                      example: Port of Amsterdam
-                      maxLength: 100
                   oneOf:
                     - type: object
                       title: UN Location Code
@@ -4085,20 +4057,6 @@ components:
                   items:
                     $ref: '#/components/schemas/Charge'
                 # New values compared to SI - END
-                placeOfIssue:
-                  type: object
-                  title: Place of Issue
-                  description: |
-                    An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-                    The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-                  properties:
-                    locationName:
-                      type: string
-                      description: The name of the location.
-                      pattern: ^\S(?:.*\S)?$
-                      example: Port of Amsterdam
-                      maxLength: 100
                   oneOf:
                     - type: object
                       title: UN Location Code
@@ -4436,20 +4394,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        placeOfIssue:
-          type: object
-          title: Place of Issue
-          description: |
-            An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-            The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-          properties:
-            locationName:
-              type: string
-              description: The name of the location.
-              pattern: ^\S(?:.*\S)?$
-              example: Port of Amsterdam
-              maxLength: 100
           oneOf:
             - type: object
               title: UN Location Code
@@ -4828,20 +4772,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        placeOfIssue:
-          type: object
-          title: Place of Issue
-          description: |
-            An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-            The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-          properties:
-            locationName:
-              type: string
-              description: The name of the location.
-              pattern: ^\S(?:.*\S)?$
-              example: Port of Amsterdam
-              maxLength: 100
           oneOf:
             - type: object
               title: UN Location Code
@@ -5247,20 +5177,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        placeOfIssue:
-          type: object
-          title: Place of Issue
-          description: |
-            An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-            The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-          properties:
-            locationName:
-              type: string
-              description: The name of the location.
-              pattern: ^\S(?:.*\S)?$
-              example: Port of Amsterdam
-              maxLength: 100
           oneOf:
             - type: object
               title: UN Location Code
@@ -8859,20 +8775,6 @@ components:
           items:
             $ref: '#/components/schemas/Charge'
         # New values compared to SI - END
-        placeOfIssue:
-          type: object
-          title: Place of Issue
-          description: |
-            An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
-
-            The location can be specified either as a `UN Location Code` or as a `CountryCode`.
-          properties:
-            locationName:
-              type: string
-              description: The name of the location.
-              pattern: ^\S(?:.*\S)?$
-              example: Port of Amsterdam
-              maxLength: 100
           oneOf:
             - type: object
               title: UN Location Code
