@@ -1,35 +1,5 @@
 http://localhost:8080/swagger-ui/index.html#/
 
-DCSA EBL V3 : 
-/v3/transport-documents/{transportDocumentReference}, ok
-/v3/shipping-instructions/{documentReference}, ok
-/v3/shipping-instructions ok
-
-DCSA EBL SUR V3:
-/v3/ebl-surrender-requests ok
-
-DCSA EBL SUR REP V3 :
-/v3/ebl-surrender-responses ok
-
-DCSA EBL PINT V3 :
-/v3/envelopes,
-/v3/envelopes/{envelopeReference}/additional-documents/{documentChecksum}, ok
-/v3/envelopes/{envelopeReference}/finish-transfer, ok
-/v3/.well-known/jwks.json ok
-
-DCSA EBL NFT V3 :
-/v3/shipping-instructions-notifications ok
-/v3/transport-document-notifications ok
-
-DCSA EBL ISS V3 :
-/v3/ebl-issuance-requests ok
-
-DCSA EBL ISS REP V3 :
-/v3/ebl-issuance-responses ok
-
-https://www.baeldung.com/java-openapi-generator-server
-
-
 In UtilizedTansportEquipmentShipper.java : change public String getIsShipperOwned() in public Boolean getIsShipperOwned() and change the return type of the method to Boolean
 
 erreur placeOfIssue :
