@@ -1,12 +1,7 @@
 from pytezos import pytezos
 from pytezos import ContractInterface
-from pytezos.operation.result import OperationResult
 from concrete import fhe
-
-
-key = "edskS2w2qaNik7bepNQi1MinJ52ratUHUJzbnyumdLJMcfGBH9U3p8yjk3Gs1Lh84iSNNfXTbNLkEvekpYB5FTnqAFezNF4jkk"
-pytezosWallet = pytezos.using(key=key)
-
+import hashlib
 
 @fhe.compiler({"data": "encrypted"})
 def encrypt_data(data):
@@ -30,15 +25,26 @@ def get_encrypted_data(data):
 
     encyptedString = ""
     for n in input:
-        encyptedString += str(circuit.encrypt(n).serialize()) + '#'
+        encyptedString += str(circuit.encrypt(n).serialize()) + '|||'
     return encyptedString
 
 
 def fill_contract(contract_address, encryptedData):
-    builder = pytezos.contract(contract_address)
+    """Fill the smart contract with the encrypted data's hash
 
+    Args:
+        contract_address (str): Contact address
+        encryptedData (str): Encrypted data
+
+    Returns:
+        Boolean: True if the contract is filled successfully, else false
+    """
+    builder = pytezos.contract(contract_address)
+    hasher = hashlib.sha256()
+    hasher.update(encryptedData.encode())
+    hashed = hasher.hexdigest()
     try:
-        opg = pytezos.bulk(builder.eblUpdate(id=encryptedData).send(min_confirmations=1))
+        opg = pytezos.bulk(builder.eblUpdate(hashed).send(min_confirmations=1))
     except Exception as e:
         print(e)
         return False
@@ -54,32 +60,32 @@ def deploy_contract(serializedeBl):
     Returns:
         str: Contract address
     """
-    global key, pytezosWallet
 
     try:
-        contract = ContractInterface.from_file('./kayp_contract.tz')
+        key = "edskRzreHRE5o6miuLLjZ7YFEWVzD7GHzozqCv8BUHCH5thfbiTZkZ2pWRhZ6TwSZSRzqn1PoKidji6DR7bzd3ZTpXYB7ucbyS"
+        contract = ContractInterface.from_file('./kayp_contract.tz').using(key=key)
         ci = contract.using(key=key)
-    except Exception as e:
-        print(e)
+    except Exception:
+        print("Error while loading contract")
         return "0x"
 
     encryptedData = get_encrypted_data(serializedeBl)
 
     try:
-        value = pytezosWallet.origination(script=ci.script()) \
-            .send(min_confirmations=1)
+        value = pytezos.origination(script=ci.script()).send(min_confirmations=1)
         opg = pytezos.shell.blocks[value.branch:] \
             .find_operation(value.opg_hash)
-    except Exception as e:
-        print(e)
+    except Exception:
+        print("Error while deploying contract")
         return "0x"
 
     contract_address = opg["contents"][0]["metadata"]["operation_result"]["originated_contracts"][0]
 
     if not fill_contract(contract_address, encryptedData):
+        print("Error while filling contract")
         return "0x"
 
     return contract_address
 
 
-print(deploy_contract("lala"))
+print(deploy_contract("test"))

@@ -21,7 +21,7 @@ public class DefaultProofOfAuthenticityRepository implements ProofOfAuthenticity
 
     @Override
     public String createProofOfAuthenticity(String serializedEbl) throws Exception {
-        String[] command = { "python3", "src/main/resources/onChain/deployNFT.py", "--seed", privateKey, "--ebl" ,  serializedEbl };
+        String[] command = { "python3", "src/main/resources/onChain/deploy.py", "--seed", privateKey, "--ebl" ,  serializedEbl };
         Process proc = new ProcessBuilder(command).start();
 
         proc.waitFor();

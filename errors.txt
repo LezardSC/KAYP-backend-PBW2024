@@ -1,5 +1,3 @@
-http://localhost:8080/swagger-ui/index.html#/
-
 In UtilizedTansportEquipmentShipper.java : change public String getIsShipperOwned() in public Boolean getIsShipperOwned() and change the return type of the method to Boolean
 
 erreur placeOfIssue :
