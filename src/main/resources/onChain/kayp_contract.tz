@@ -4,6 +4,18 @@ code
   {
     UNPAIR;     # @parameter : @storage
     # == eblUpdate ==
+    # assert self.data.owner == sp.sender # @parameter : @storage
+    SENDER;     # @sender : @parameter : @storage
+    DUP 3;      # @storage : @sender : @parameter : @storage
+    CDR;        # address : @sender : @parameter : @storage
+    COMPARE;    # int : @parameter : @storage
+    EQ;         # bool : @parameter : @storage
+    IF
+      {}
+      {
+        PUSH string "Assert failure: self.data.owner == sp.sender"; # string : @parameter : @storage
+        FAILWITH;   # FAILED
+      }; # @parameter : @storage
     # self.data.id = id # @parameter : @storage
     UPDATE 1;   # @storage
     NIL operation; # list operation : @storage

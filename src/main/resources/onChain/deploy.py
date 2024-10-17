@@ -29,7 +29,7 @@ def get_encrypted_data(data):
     return encyptedString
 
 
-def fill_contract(contract_address, key, encryptedData):
+def fill_contract(contract_address, wallet, encryptedData):
     """Fill the smart contract with the encrypted data's hash
 
     Args:
@@ -42,9 +42,10 @@ def fill_contract(contract_address, key, encryptedData):
     hasher = hashlib.sha256()
     hasher.update(encryptedData.encode())
     hashed = hasher.hexdigest()
-    builder = pytezos.contract(contract_address).using(key=key)
+
+    builder = wallet.contract(contract_address)
     try:
-        opg = pytezos.bulk(builder.eblUpdate(hashed).send(min_confirmations=1))
+        opg = builder.eblUpdate(hashed).send(min_confirmations=1)
     except Exception as e:
         print(e)
         return False
@@ -81,7 +82,7 @@ def deploy_contract(serializedeBl):
 
     contract_address = opg["contents"][0]["metadata"]["operation_result"]["originated_contracts"][0]
 
-    if not fill_contract(contract_address, key, encryptedData):
+    if not fill_contract(contract_address, wallet, encryptedData):
         print("Error while filling contract")
         return "0x"
 
