@@ -29,7 +29,7 @@ def get_encrypted_data(data):
     return encyptedString
 
 
-def fill_contract(contract_address, encryptedData):
+def fill_contract(contract_address, key, encryptedData):
     """Fill the smart contract with the encrypted data's hash
 
     Args:
@@ -39,10 +39,10 @@ def fill_contract(contract_address, encryptedData):
     Returns:
         Boolean: True if the contract is filled successfully, else false
     """
-    builder = pytezos.contract(contract_address)
     hasher = hashlib.sha256()
     hasher.update(encryptedData.encode())
     hashed = hasher.hexdigest()
+    builder = pytezos.contract(contract_address).using(key=key)
     try:
         opg = pytezos.bulk(builder.eblUpdate(hashed).send(min_confirmations=1))
     except Exception as e:
@@ -63,8 +63,7 @@ def deploy_contract(serializedeBl):
 
     try:
         key = "edskRzreHRE5o6miuLLjZ7YFEWVzD7GHzozqCv8BUHCH5thfbiTZkZ2pWRhZ6TwSZSRzqn1PoKidji6DR7bzd3ZTpXYB7ucbyS"
-        contract = ContractInterface.from_file('./kayp_contract.tz').using(key=key)
-        ci = contract.using(key=key)
+        contract = ContractInterface.from_file('./kayp_contract.tz')
     except Exception:
         print("Error while loading contract")
         return "0x"
@@ -72,7 +71,8 @@ def deploy_contract(serializedeBl):
     encryptedData = get_encrypted_data(serializedeBl)
 
     try:
-        value = pytezos.origination(script=ci.script()).send(min_confirmations=1)
+        wallet = pytezos.using(key=key)
+        value = wallet.origination(script=contract.script()).send(min_confirmations=1)
         opg = pytezos.shell.blocks[value.branch:] \
             .find_operation(value.opg_hash)
     except Exception:
@@ -81,7 +81,7 @@ def deploy_contract(serializedeBl):
 
     contract_address = opg["contents"][0]["metadata"]["operation_result"]["originated_contracts"][0]
 
-    if not fill_contract(contract_address, encryptedData):
+    if not fill_contract(contract_address, key, encryptedData):
         print("Error while filling contract")
         return "0x"
 
