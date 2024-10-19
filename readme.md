@@ -33,10 +33,49 @@ If you want to try the deployment of the contract:
 The backend implements APIs route that deploy a contract on the blockchain. We serialize the eBl, encrypt and hash it to store it.
 For the APIs we use the DCSA standard (https://app.swaggerhub.com/apis/dcsaorg/DCSA_EBL/3.0.0-Beta-1). 
 
-## Blockchain Implementation
-After getting the hashed document, we deploy the smart contract using Pytezos.
-
-This using the following stack:
-
 - Language - [Python](https://www.python.org/)
 - Framework - [Spring boot](https://spring.io/)
+  
+# Smart Contract
+This repository includes two key smart contracts: the EBL Contract and the Escrow Contract. Each contract is explained below, including its purpose, setup, and usage.
+
+**1. EBL Contract**
+
+The EBL Contract stores a cryptographically secured version of an electronic Bill of Lading (eBL) on the blockchain. This ensures that the information is authenticated and tamper-proof. The contract certifies the eBL, making sure that only the authorized owner can update or modify it.
+
+**Contract Initialization**
+
+Owner Address: The address that has exclusive permission to manage the contract (e.g., a shipping authority).
+ID: The crypted version of the eBL to be stored.
+Entrypoints
+eblUpdate(id): Allows the owner to update the crypted eBL. Only the authorized owner can call this function to ensure security.
+Example Scenario
+Setup: Initialize with the owner address and a crypted eBL ID.
+Update: The owner can update the crypted eBL when necessary.
+Access Control: Unauthorized users cannot modify the eBL.
+
+**2. Escrow Contract**
+
+The Escrow Contract enables secure transactions between buyers, sellers, and delivery agents. It ensures that funds are only released when all parties have fulfilled their commitments.
+
+**Contract Initialization**
+
+Buyer Address: The purchaser's address.
+Seller Address: The vendor's address.
+Delivery Address: The address responsible for confirming receipt.
+Selling Price: The agreed transaction amount.
+Entrypoints
+deposit: Allows the buyer to deposit funds, initiating the transaction.
+dispatch_items: The seller confirms dispatching items.
+confirm_delivery: The delivery agent confirms receipt, releasing funds to the seller.
+reclaim_fund: Allows the buyer to reclaim their funds if the items are not dispatched.
+
+** Example Scenario
+
+Buyer Deposits Funds: The buyer sends the agreed amount, and the state changes to PAYMENT_RECEIVED.
+Seller Dispatches Items: The seller marks the items as dispatched.
+Delivery Confirmation: Upon confirmation, the contract releases the payment to the seller.
+Reclaim Funds: If the items are not dispatched, the buyer can reclaim the funds.
+
+
+
