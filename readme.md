@@ -14,22 +14,29 @@ Our solution addresses critical industry challenges, the efficient and secure:
 
 Follow these steps to clone the repository and start the development server:
 
-- `cd backend`
+- `git clone https://github.com/theocerdan/kayp_ebl_api.git`
+- `cd kayp_ebl_api`
+- `python3 -m venv venv`
+- `source venv/bin/activate`
+- `pip install -r requirements.txt`
 - `mvn install`
 - `java -jar target/bol-0.0.1-SNAPSHOT.jar`
-- git clone the [frontend repository](https://github.com/theocerdan/frontend_kayp/) and follow the instructions
+
+When the server is started go on this link : http://localhost:8080/swagger-ui/index.html
+If you want to try the deployment of the contract:
+- Click on "POST /v3/shipping-instructions" then "Try it out".
+- Go on this link : https://pastebin.com/qWGNWZW0 copy the content and paste it in the "request body" field.
+- Click on "Execute" and you will see the response with the contract address in the servers log.
 
 # Backend
-User management with authentication.
-To deploy the NFT we need to get every informations needed to create the bill of Lading. 
-In order to do that, we use the DCSA API (https://app.swaggerhub.com/apis/dcsaorg/DCSA_EBL/3.0.0-Beta-1) to standardize the documents. Then we serialize it and hash it.
+
+The backend implements APIs route that deploy a contract on the blockchain. We serialize the eBl, encrypt and hash it to store it.
+For the APIs we use the DCSA standard (https://app.swaggerhub.com/apis/dcsaorg/DCSA_EBL/3.0.0-Beta-1). 
 
 ## Blockchain Implementation
-After getting the hashed document, we mint a NFT and store the hash in its metadata.
+After getting the hashed document, we deploy the smart contract using Pytezos.
 
 This using the following stack:
 
 - Language - [Python](https://www.python.org/)
 - Framework - [Spring boot](https://spring.io/)
-
-Swagger link : http://localhost:8080/swagger-ui/index.html
