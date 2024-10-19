@@ -1,6 +1,9 @@
 from pytezos import pytezos, ContractInterface
 from concrete import fhe
 import hashlib
+import argparse
+import os
+
 
 @fhe.compiler({"data": "encrypted"})
 def encrypt_data(data):
@@ -28,7 +31,7 @@ def get_encrypted_data(data):
     return encyptedString
 
 
-def getAddress(key):
+def getAddress(key, path):
     """Function to get the address of the owner of the contract
 
     Args:
@@ -37,7 +40,7 @@ def getAddress(key):
     Returns:
         str: address of the owner
     """
-    contract = ContractInterface.from_file('./kayp_contract.tz').using(key=key)
+    contract = ContractInterface.from_file(path + '/kayp_contract.tz').using(key=key)
     return (contract.storage.dummy()["owner"])
 
 
@@ -52,10 +55,11 @@ def deploy_contract(serializedeBl):
     """
 
     key = "edskRzreHRE5o6miuLLjZ7YFEWVzD7GHzozqCv8BUHCH5thfbiTZkZ2pWRhZ6TwSZSRzqn1PoKidji6DR7bzd3ZTpXYB7ucbyS"
+    path = os.path.dirname(os.path.realpath(__file__))
     try:
-        contract = ContractInterface.from_file('./kayp_contract.tz')
+        contract = ContractInterface.from_file(path + '/kayp_contract.tz')
     except Exception:
-        print("Error while loading contract")
+        print("Error while loading contract ")
         return "0x"
 
     encryptedData = get_encrypted_data(serializedeBl)
@@ -65,16 +69,22 @@ def deploy_contract(serializedeBl):
 
     try:
         wallet = pytezos.using(key=key)
-        initial_storage = {'owner': getAddress(key), 'id': hashed}
+        initial_storage = {'owner': getAddress(key, path), 'id': hashed}
         value = wallet.origination(script=contract.script(initial_storage)).send(min_confirmations=1)
         opg = pytezos.shell.blocks[value.branch:] \
             .find_operation(value.opg_hash)
     except Exception:
-        print("Error while deploying contract")
+        print("Error while deploying contract ")
         return "0x"
 
     contract_address = opg["contents"][0]["metadata"]["operation_result"]["originated_contracts"][0]
     return contract_address
 
 
-print(deploy_contract("test"))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Deploy contract')
+    parser.add_argument('-ebl', '--ebl', type=str, help='Serialized ebl', required=True)
+    args = parser.parse_args()
+
+    result = deploy_contract(args.ebl)
+    print(result)

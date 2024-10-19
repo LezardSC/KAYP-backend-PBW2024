@@ -37,12 +37,8 @@ public class ShippingInstructionsControllerV3 implements V3ApiDelegate {
                 @RequestBody CreateShippingInstructions createShippingInstructions) throws Exception {
         
                 String jsonEbl = new ObjectMapper().writeValueAsString(createShippingInstructions);
-                
-                MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-                messageDigest.update(jsonEbl.getBytes());
-                String stringHash = new String(messageDigest.digest());
-
-                String nftId = proofOfAuthenticityRepository.createProofOfAuthenticity(stringHash);
+                String contractAddress = proofOfAuthenticityRepository.createProofOfAuthenticity(jsonEbl);
+                System.out.println("contract Address: " + contractAddress);
                 //202 Accepted
                 //400 Bad Request
                 //500 Server Error
