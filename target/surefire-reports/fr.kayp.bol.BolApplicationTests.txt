@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fr.kayp.bol.BolApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.316 s -- in fr.kayp.bol.BolApplicationTests
